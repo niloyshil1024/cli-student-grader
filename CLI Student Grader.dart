@@ -2,12 +2,26 @@ import 'dart:io';
 
 void main(){
 
-var isrunning = true; // var → mutable variable
+var isrunning = true;
 
-do{ // do-while loop
+const String title = "[=== Student Grader v1.0 ===]";
+
+final Set<String> availableSubject = {
+
+"Microprocessor",
+"Data Structure",
+"Object oriented",
+"Internet Programming",
+"Competitive Programming"
+
+};
+
+var students = [];
+
+do{
 
 print("""
-[=== Student Grader v1.0 ===]
+$title
 
 1. Add Student
 2. Record Score
@@ -19,25 +33,52 @@ print("""
 8. Exit
 
 Choose option:
-"""); // multi-line string
+""");
 
-var choice = stdin.readLineSync(); // var
+var choice = stdin.readLineSync();
 
-switch(choice){ // switch
+switch(choice){
 
+// =====================
+// CASE 1: ADD STUDENT
+// =====================
 case "1":
-print("Add Student");
+
+print("Enter student name:");
+
+var name = stdin.readLineSync()!;
+
+Map<String,dynamic> student = {
+
+"name": name,
+"Scores": [],
+"Subjects": {...availableSubject}, // spread operator
+"bonus": null,
+"comment": null
+
+};
+
+students.add(student);
+
+print("Student added successfully!");
+
 break;
 
+// =====================
+// CASE 8: EXIT
+// =====================
 case "8":
+
 isrunning = false;
+
 break;
 
 default:
-print("Invalid");
+
+print("Invalid choice");
 
 }
 
-}while(isrunning); // do-while
+}while(isrunning);
 
 }
