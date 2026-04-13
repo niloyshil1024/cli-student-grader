@@ -134,6 +134,31 @@ selectedStudent["comment"] = comment;
 print("Comment added!");
 
 break;
+case "5":
+
+if (students.isEmpty) {
+print("No students found");
+break;
+}
+
+print("---- ALL STUDENTS ----");
+
+// for-in loop
+for (var student in students) {
+
+var tags = [
+student["name"],
+"${student["Scores"].length} scores",
+
+// collection if
+if (student["bonus"] != null) "Bonus Added",
+if (student["comment"] != null) "Comment Added"
+];
+
+print(tags.join(" | "));
+}
+
+break;
 case "6":
 
 if (students.isEmpty) {
@@ -179,7 +204,7 @@ grade = "F";
 }
 
 print("""
-[]===== REPORT CARD =====]
+[]===== REPORT CARD =====[]
 || Name: ${student["name"]}
 || Scores: ${student["Scores"]}
 || Bonus: ${student["bonus"] ?? 0}
@@ -187,6 +212,66 @@ print("""
 || Grade: $grade
 || Comment: ${student["comment"] ?? "No comment"}
 =======================
+""");
+
+break;
+case "7":
+
+if (students.isEmpty) {
+print("No students found");
+break;
+}
+
+int totalStudents = students.length;
+
+int passCount = 0;
+
+Set<String> grades = {};
+
+var summaryLines = [
+
+for (var s in students)
+"${s["name"]} → ${s["Scores"].isNotEmpty ? "Has Scores" : "No Scores"}"
+
+];
+
+for (var student in students) {
+
+double sum = 0;
+
+for (var s in student["Scores"]) {
+sum += s;
+}
+
+double avg = student["Scores"].isEmpty ? 0 : sum / student["Scores"].length;
+
+avg += (student["bonus"] ?? 0);
+
+// logical operator (&&)
+if (student["Scores"].isNotEmpty && avg >= 60) {
+passCount++;
+}
+
+// grade
+String grade;
+
+if (avg >= 90) grade = "A";
+else if (avg >= 80) grade = "B";
+else if (avg >= 70) grade = "C";
+else if (avg >= 60) grade = "D";
+else grade = "F";
+
+grades.add(grade);
+
+}
+
+print("""
+Total Students: $totalStudents
+Pass Students: $passCount
+Unique Grades: $grades
+
+--- Summary ---
+${summaryLines.join("\n")}
 """);
 
 break;
