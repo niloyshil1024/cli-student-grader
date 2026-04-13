@@ -63,6 +63,43 @@ students.add(student);
 print("Student added successfully!");
 
 break;
+case "2":
+
+if (students.isEmpty) {
+print("Add student first");
+break;
+}
+
+print("--- Student List ---");
+
+for (int i = 0; i < students.length; i++) {
+print("${i + 1}. ${students[i]["name"]}");
+}
+
+stdout.write("Select student number: ");
+int index = int.parse(stdin.readLineSync()!) - 1;
+
+var selectedStudent = students[index];
+
+double score = -1;
+
+// while loop → input validation
+while (score < 0 || score > 100) {
+
+stdout.write("Enter score (0-100): ");
+score = double.parse(stdin.readLineSync()!);
+
+if (score < 0 || score > 100) {
+print("Invalid score! Try again");
+}
+
+}
+
+selectedStudent["Scores"].add(score);
+
+print("Score added successfully!");
+
+break;
 
 // =====================
 // CASE 8: EXIT
