@@ -134,6 +134,62 @@ selectedStudent["comment"] = comment;
 print("Comment added!");
 
 break;
+case "6":
+
+if (students.isEmpty) {
+print("No students found");
+break;
+}
+
+print("--- Select Student ---");
+
+for (int i = 0; i < students.length; i++) {
+print("${i + 1}. ${students[i]["name"]}");
+}
+
+int index = int.parse(stdin.readLineSync()!) - 1;
+
+var student = students[index];
+
+// average calculation
+double sum = 0;
+
+for (var s in student["Scores"]) {
+sum += s;
+}
+
+double avg = student["Scores"].isEmpty ? 0 : sum / student["Scores"].length;
+
+// bonus add (?? operator)
+avg += (student["bonus"] ?? 0);
+
+// grade calculation
+String grade;
+
+if (avg >= 90) {
+grade = "A";
+} else if (avg >= 80) {
+grade = "B";
+} else if (avg >= 70) {
+grade = "C";
+} else if (avg >= 60) {
+grade = "D";
+} else {
+grade = "F";
+}
+
+print("""
+[]===== REPORT CARD =====]
+|| Name: ${student["name"]}
+|| Scores: ${student["Scores"]}
+|| Bonus: ${student["bonus"] ?? 0}
+|| Average: $avg
+|| Grade: $grade
+|| Comment: ${student["comment"] ?? "No comment"}
+=======================
+""");
+
+break;
 
 // =====================
 // CASE 8: EXIT
