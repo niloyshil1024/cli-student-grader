@@ -100,6 +100,40 @@ selectedStudent["Scores"].add(score);
 print("Score added successfully!");
 
 break;
+case "3":
+
+stdout.write("Select student number: ");
+int index = int.parse(stdin.readLineSync()!) - 1;
+
+var selectedStudent = students[index];
+
+stdout.write("Enter bonus (1-10): ");
+int bonus = int.parse(stdin.readLineSync()!);
+
+// null-aware assign (??=)
+selectedStudent["bonus"] ??= bonus;
+
+print("Bonus added!");
+
+break;
+
+
+case "4":
+
+stdout.write("Select student number: ");
+int index = int.parse(stdin.readLineSync()!) - 1;
+
+var selectedStudent = students[index];
+
+stdout.write("Enter comment: ");
+String comment = stdin.readLineSync()!;
+
+// normal assignment
+selectedStudent["comment"] = comment;
+
+print("Comment added!");
+
+break;
 
 // =====================
 // CASE 8: EXIT
